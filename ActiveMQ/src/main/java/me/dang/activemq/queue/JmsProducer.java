@@ -1,4 +1,4 @@
-package me.dang.activemq;
+package me.dang.activemq.queue;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
