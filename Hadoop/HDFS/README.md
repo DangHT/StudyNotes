@@ -28,7 +28,7 @@ HDFS基于 master/slave（主/从）架构。一般情况下，一个HDFS集群�
 
 
 
-![](https://raw.githubusercontent.com/DangHT/StudyNotes/master/Hadoop/HDFS/static/images/hdfsarchitecture.jpg)
+![](https://raw.githubusercontent.com/DangHT/StudyNotes/master/Hadoop/HDFS/static/images/hdfsarchitecture.png)
 
 **NameNode**
 
@@ -75,7 +75,7 @@ NameNode负责有关数据备份的所有决定。它会定期地从集群中的
 
 收到心跳信号表示DataNode正常运行。Blockreport上包含了DataNode上所有的块信息
 
-![](https://raw.githubusercontent.com/DangHT/StudyNotes/master/Hadoop/HDFS/static/images/hdfsdatanodes.jpg)
+![](https://raw.githubusercontent.com/DangHT/StudyNotes/master/Hadoop/HDFS/static/images/hdfsdatanodes.png)
 
 ### 备份放置策略
 
