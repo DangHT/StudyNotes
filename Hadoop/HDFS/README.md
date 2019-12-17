@@ -121,11 +121,41 @@ NameNode负责有关数据备份的所有决定。它会定期地从集群中的
 4. DataNode根据客户端请求下载的数据块找到并返回
 5. 客户端以Packet为单位接收文件，先在本地缓存，然后写入目标文件
 
+## FSImage和Edits文件
+
+在HDFS集群中，NameNode的作用至关重要，它保存着集群中文件的路径及备份情况，这些信息就是元数据MetaData，而它在磁盘中实际的名称是FSImage。
+
+NameData需要经常的处理客户端请求，所以FSImage需要被经常地随机访问，因此它的工作效率十分关键。**为了保证高效率，NamNode工作时会把FSImage加载到内存中**。
+
+仅仅这样是不够的，试想一下，如果NameNode突然断电，内存中的FSImage就会丢失，如果此前执行过文件更新操作，那么这些更新操作也就会丢失，破坏一致性。因此需要及时地同步内存与磁盘中的FSImage。但是如果频繁地与磁盘同步，又会严重降低效率，于是提出了Edits文件。**Edit文件负责记录自上一次检查点之后对HDFS的所有操作**。它只用记录操作指令不用真正修改文件，所以大大提高了效率。**将FSImage与Edits文件合并之后，就是最新的MetaData**。
+
+合并FSImage和Edits的过程也是很耗费资源的，为了进一步提高NameNode的效率，于是引入了一个新的节点**SecondaryNameNode**，它的作用就是专门**定期地合并FSImage和Edits并将最新的结果推送给NameNode**。
+
+*注意：SecondaryNameNode仅仅是辅助NameNode工作提高效率，它并不能顶替NameNode，仅有NameNode和SecondaryNameNode的集群依然是Single-Point-of-Failure的，后面关于高可用HA的加入可以解决这一问题*
+
+FSImage和Edits文件的生成路径通常是：
+
+```bash
+$HADOOP_HOME/data/tmp/dfs/name/current
+```
+
+可以使用 oiv 和 oev 命令分别查看 FSImage 和 Edits 文件
+
+```bash
+hdfs oiv -p 文件类型 -i 镜像文件 -o 转换后文件的输出路径
+例：hdfs oiv -p XML -i fsimage_0000000000000000025 -o $HADOOP_HOME/
+
+hdfs oev -p 文件类型 -i 编辑日志 -o 转换后文件的输出路径
+例：hdfs oev -p XML -i edits_0000000000000000012-0000000000000000013 -o $HADOOP_HOME/
+```
+
+
+
 ## 参考资料
 
 > [1] [Hadoop-2.7.7 HDFS Architecture](https://hadoop.apache.org/docs/r2.7.7/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html)
 >
-> [2] 尚硅谷大数据之Hadoop
+> [2] [尚硅谷大数据之Hadoop](https://www.bilibili.com/video/av32081351)
 >
 > [3] [Hadoop深入学习：解析HDFS的写文件流程](https://www.iteye.com/blog/flyingdutchman-1900536)
 >
