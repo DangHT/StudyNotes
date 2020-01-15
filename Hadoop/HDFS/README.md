@@ -149,7 +149,27 @@ hdfs oev -p 文件类型 -i 编辑日志 -o 转换后文件的输出路径
 例：hdfs oev -p XML -i edits_0000000000000000012-0000000000000000013 -o $HADOOP_HOME/
 ```
 
+## NameNode和SecondaryNameNode工作机制
 
+![](C:\Users\dht92\Desktop\NameNode.jpg)
+
+### NameNode工作机制
+
+1. 第一次启动NameNode格式化后，创建FSImage和Edits文件。如果不是第一次启动，直接启动加载编辑日志和镜像文件到内存
+2. 客户端对元数据进行增删改的请求
+3. NameNode记录操作日志，更新滚动日志
+4. NameNode在内存中对数据进行增删改
+
+### SecondryNameNode工作机制
+
+1. Secondary NameNode询问NameNode是否需要CheckPoint。直接带回NameNode是否检查结果。（注意CheckPoint的触发条件）
+2. Secondary NameNode请求执行CheckPoint。
+3. NameNode滚动正在写的Edits日志。
+4. 将滚动前的编辑日志和镜像文件拷贝到Secondary NameNode。
+5. Secondary NameNode加载编辑日志和镜像文件到内存，并合并。
+6. 生成新的镜像文件fsimage.chkpoint。
+7. 拷贝fsimage.chkpoint到NameNode。
+8. NameNode将fsimage.chkpoint重新命名成fsimage。
 
 ## 参考资料
 
