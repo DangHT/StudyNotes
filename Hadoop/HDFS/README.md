@@ -151,7 +151,7 @@ hdfs oev -p 文件类型 -i 编辑日志 -o 转换后文件的输出路径
 
 ## NameNode和SecondaryNameNode工作机制
 
-![](C:\Users\dht92\Desktop\NameNode.jpg)
+![](https://raw.githubusercontent.com/DangHT/StudyNotes/master/Hadoop/HDFS/static/images/namenode.jpg)
 
 ### NameNode工作机制
 
