@@ -1,3 +1,5 @@
+use std::fs::read;
+
 fn main() {
     //注意：这里的字符串是String类型的，若直接赋值一个字符串的变量是&str类型的
     //&str分配在栈空间上，String类型分配在堆空间上
@@ -23,8 +25,7 @@ fn main() {
     let s = String::from("hello");  // s 进入作用域
 
     takes_ownership(s);             // s 的值移动到函数里 ...
-                                    // ... 所以到这里不再有效
-    println!("{}", s)
+    // println!("{}", s);  ... 所以到这里不再有效，编译器在这里会报错
 
     let x = 5;                 // x 进入作用域
 
@@ -39,6 +40,12 @@ fn main() {
     let s3 = takes_and_gives_back(s2);           // s2 被移动到
                                                  // takes_and_gives_back 中,
                                                  // 它也将返回值移给 s3
+
+    let s4 = String::from("hello");
+    let len = calculate_length(&s4);
+
+    let str = String::from("hello world");
+    println!("{}", first_word(&str));
 
 }// 这里, x 先移出了作用域，然后是 s。但因为 s 的值已被移走，
 // 所以不会有特殊操作
@@ -62,4 +69,21 @@ fn gives_ownership() -> String {             // gives_ownership 将返回值移�
 // takes_and_gives_back 将传入字符串并返回该值
 fn takes_and_gives_back(a_string: String) -> String { // a_string 进入作用域
     a_string  // 返回 a_string 并移出给调用的函数
+}
+
+fn calculate_length(s: &String) -> usize { // s 是对 String 的引用
+    s.len()
+}// 这里，s 离开了作用域。但因为它并不拥有引用值的所有权，
+// 所以什么也不会发生
+
+fn first_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    s
 }
