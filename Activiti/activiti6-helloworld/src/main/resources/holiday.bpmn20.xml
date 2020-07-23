@@ -6,7 +6,7 @@
     <userTask id="managerApprove" name="部门经理审批">
       <extensionElements>
         <activiti:formProperty id="mApprovment" name="部门经理审批结果" type="string" required="true"></activiti:formProperty>
-        <activiti:formProperty id="mComment" name="部门经理审批备注"></activiti:formProperty>
+        <activiti:formProperty id="mComment" name="部门经理审批备注" type="string"></activiti:formProperty>
       </extensionElements>
     </userTask>
     <sequenceFlow id="flow3" sourceRef="decideSubmit" targetRef="managerApprove">
@@ -17,7 +17,7 @@
     <userTask id="bossApprove" name="总经理审批">
       <extensionElements>
         <activiti:formProperty id="bApprovment" name="总经理审批结果" type="string" required="true"></activiti:formProperty>
-        <activiti:formProperty id="bComment" name="总经理审批备注"></activiti:formProperty>
+        <activiti:formProperty id="bComment" name="总经理审批备注" type="string"></activiti:formProperty>
       </extensionElements>
     </userTask>
     <sequenceFlow id="flow5" sourceRef="managerDecide" targetRef="bossApprove">
