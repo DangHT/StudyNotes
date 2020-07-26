@@ -19,16 +19,28 @@
     </modules>
 
     <properties>
+        <activiti-version>6.0.0</activiti-version>
         <guava-version>24.1.1-jre</guava-version>
         <h2-version>1.4.200</h2-version>
         <mysql-connector-version>8.0.20</mysql-connector-version>
         <druid-version>1.1.23</druid-version>
         <logback-version>1.2.3</logback-version>
         <springframework-version>5.2.8.RELEASE</springframework-version>
+        <junit-version>4.12</junit-version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-engine</artifactId>
+                <version>${activiti-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-spring</artifactId>
+                <version>${activiti-version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
@@ -55,6 +67,12 @@
                 <version>${logback-version}</version>
             </dependency>
             <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit-version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
                 <version>${springframework-version}</version>
@@ -67,6 +85,11 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
+                <version>${springframework-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
                 <version>${springframework-version}</version>
             </dependency>
         </dependencies>
