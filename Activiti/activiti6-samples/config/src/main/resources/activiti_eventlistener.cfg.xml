@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration">
+    <!--<property name="commandInvoker" ref="commandInvoker"/>-->
+    <!--<property name="eventListeners">-->
+    <!--  <list>-->
+    <!--    <bean class="me.danght.activiti.event.ProcessEventListener"/>-->
+    <!--  </list>-->
+    <!--</property>-->
+
+    <!--只监听指定类型事件-->
+    <property name="typedEventListeners">
+      <map>
+        <entry key="PROCESS_STARTED">
+          <list>
+            <bean class="me.danght.activiti.event.ProcessEventListener"/>
+          </list>
+        </entry>
+      </map>
+    </property>
+
+    <!--<property name="eventListeners">-->
+    <!--  <list>-->
+    <!--    <bean class="me.danght.activiti.event.CustomEventListener"/>-->
+    <!--  </list>-->
+    <!--</property>-->
+  </bean>
+  <bean id="commandInvoker" class="me.danght.activiti.interceptor.MDCCommandInvoker"/>
+</beans>
