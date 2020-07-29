@@ -18,6 +18,7 @@
     <modules>
         <module>config</module>
         <module>coreapi</module>
+        <module>dbentity</module>
     </modules>
 
     <properties>
