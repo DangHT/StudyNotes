@@ -31,6 +31,7 @@
         <logback-version>1.2.3</logback-version>
         <springframework-version>5.2.8.RELEASE</springframework-version>
         <junit-version>4.12</junit-version>
+        <groovy-version>2.4.7</groovy-version>
     </properties>
 
     <dependencyManagement>
@@ -95,6 +96,11 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
                 <version>${springframework-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+                <version>${groovy-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
