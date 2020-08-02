@@ -1,0 +1,21 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    beans:
+      enabled: false
+spring:
+  jdbc:
+    template:
+      max-rows: 1000
+
+  datasource:
+    druid:
+      url: "jdbc:mysql://localhost/activiti6?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai"
+      username: root
+      password: 123456
+      initial-size: 1
+      max-active: 10
+      driver-class-name: "com.mysql.cj.jdbc.Driver"
