@@ -30,7 +30,7 @@
         <druid-version>1.1.23</druid-version>
         <logback-version>1.2.3</logback-version>
         <springframework-version>5.2.8.RELEASE</springframework-version>
-        <junit-version>4.12</junit-version>
+        <junit-version>4.13.1</junit-version>
         <groovy-version>2.4.7</groovy-version>
     </properties>
 
