@@ -23,7 +23,7 @@
     </modules>
 
     <properties>
-        <activiti-version>6.0.0</activiti-version>
+        <activiti-version>7-201802-EA</activiti-version>
         <guava-version>24.1.1-jre</guava-version>
         <h2-version>1.4.200</h2-version>
         <mysql-connector-version>8.0.20</mysql-connector-version>
