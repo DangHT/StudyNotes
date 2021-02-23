@@ -27,7 +27,7 @@
         <guava-version>30.1-jre</guava-version>
         <h2-version>1.4.200</h2-version>
         <mysql-connector-version>8.0.23</mysql-connector-version>
-        <druid-version>1.2.4</druid-version>
+        <druid-version>1.2.5</druid-version>
         <logback-version>1.2.3</logback-version>
         <springframework-version>5.3.3</springframework-version>
         <junit-version>4.13.1</junit-version>
